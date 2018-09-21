@@ -1,7 +1,7 @@
 #Python libraries that we need to import for our bot
 import random
 from flask import Flask, request
-from pymessenger.bot import Bot
+from pymessenger.pymessenger.bot import Bot
 import os 
 app = Flask(__name__)
 #ACCESS_TOKEN = 'ACCESS_TOKEN'   
@@ -34,8 +34,10 @@ def receive_message():
                     send_message(recipient_id, response_sent_text)
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
-                    response_sent_nontext = get_message()
-                    send_message(recipient_id, response_sent_nontext)
+                    for att in message['message'].get('attachments'):
+                        file_type = att['type']
+                        url = att['payload']['url']
+                        send_attachment_url_message(recipient_id, file_type, url)
     return "Message Processed"
 
 
@@ -58,6 +60,12 @@ def send_message(recipient_id, response):
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
     return "success"
+
+def send_attachment_url_message(recipient_id, file_type, url):
+    #sends user the text message provided via input response parameter
+    bot.send_attachment_url(recipient_id, file_type, url)
+    return "success"
+
 
 if __name__ == "__main__":
     app.run()
