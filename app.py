@@ -1,5 +1,6 @@
 #Python libraries that we need to import for our bot
 import random
+import urllib
 from flask import Flask, request
 from pymessenger.bot import Bot
 import os 
@@ -37,7 +38,8 @@ def receive_message():
                     for att in message['message'].get('attachments'):
                         file_type = att['type']
                         url = att['payload']['url']
-                        send_attachment_url_message(recipient_id, file_type, url)
+                        download_file(url)
+                        #send_attachment_url_message(recipient_id, file_type, url)
     return "Message Processed"
 
 
@@ -66,6 +68,9 @@ def send_attachment_url_message(recipient_id, file_type, url):
     bot.send_attachment_url(recipient_id, file_type, url)
     return "success"
 
+def download_file(url):
+    file = urllib.request.urlretrieve(url)
+    print(file)
 
 if __name__ == "__main__":
     app.run()
