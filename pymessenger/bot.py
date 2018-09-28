@@ -64,6 +64,7 @@ class Bot:
         Output:
             Response from API as <dict>
         """
+        print(type(recipient_id))
         payload = {
             'recipient': {
                 {
