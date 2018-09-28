@@ -82,12 +82,13 @@ class Bot:
             },
             'filedata': (os.path.basename(attachment_path), open(attachment_path, 'rb'))
         }
-        multipart_data = MultipartEncoder(payload)
+        """ multipart_data = MultipartEncoder(payload)
         multipart_header = {
             'Content-Type': multipart_data.content_type
         }
         return requests.post(self.graph_url, data=multipart_data,
-                             params=self.auth_args, headers=multipart_header).json()
+                             params=self.auth_args, headers=multipart_header).json() """
+        return ''
 
     def send_attachment_url(self, recipient_id, attachment_type, attachment_url,
                             notification_type=NotificationType.regular):
