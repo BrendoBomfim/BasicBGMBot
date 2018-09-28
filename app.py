@@ -40,9 +40,11 @@ def receive_message():
                         file_type = att['type']
                         url = att['payload']['url']
                         file_name = url.split("/")[5].split("?")[0]
+                        file_location = "/tmp/" + file_name
                         base64_string = download_file(url)
-                        save_file(base64_string, file_name)
-                        print(os.listdir("/tmp"))
+                        save_file(base64_string, file_location)
+                        print(send_attachment_message(recipient_id, file_type, file_location))
+                        #print(os.listdir("/tmp"))
                         #send_attachment_url_message(recipient_id, file_type, url)
     return "Message Processed"
 
@@ -72,8 +74,12 @@ def send_attachment_url_message(recipient_id, file_type, url):
     bot.send_attachment_url(recipient_id, file_type, url)
     return "success"
 
-def save_file(data, file_name):
-    with open("/tmp/" + file_name, "wb") as fh:
+def send_attachment_message(recipient_id, file_type, file_location):
+    bot.send_attachment(recipient_id, file_type, file_location)
+    return "sucess"
+
+def save_file(data, file_location):
+    with open(file_location, "wb") as fh:
         fh.write(base64.decodebytes(data))
 
 def download_file(url):
