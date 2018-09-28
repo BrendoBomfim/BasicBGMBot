@@ -65,6 +65,7 @@ class Bot:
             Response from API as <dict>
         """
         print(notification_type, os.path.basename(attachment_path))
+        """
         payload = {
             'recipient': {
                 {
@@ -82,7 +83,7 @@ class Bot:
             },
             'filedata': (os.path.basename(attachment_path), open(attachment_path, 'rb'))
         }
-        """ multipart_data = MultipartEncoder(payload)
+         multipart_data = MultipartEncoder(payload)
         multipart_header = {
             'Content-Type': multipart_data.content_type
         }
