@@ -42,7 +42,7 @@ def receive_message():
                         file_name = url.split("/")[5].split("?")[0]
                         base64_string = download_file(url)
                         save_file(base64_string, file_name)
-                        os.listdir("/tmp")
+                        print(os.listdir("/tmp"))
                         #send_attachment_url_message(recipient_id, file_type, url)
     return "Message Processed"
 
