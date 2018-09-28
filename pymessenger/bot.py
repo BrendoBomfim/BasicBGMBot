@@ -64,11 +64,11 @@ class Bot:
         Output:
             Response from API as <dict>
         """
-        print(type(recipient_id), type(attachment_type), type(attachment_path))
+        print(notification_type, os.path.basename(attachment_path))
         payload = {
             'recipient': {
                 {
-                    'id': frozenset(recipient_id)
+                    'id': recipient_id
                 }
             },
             'notification_type': notification_type,
