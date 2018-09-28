@@ -66,20 +66,16 @@ class Bot:
         """
         print(type(recipient_id), type(attachment_type), type(attachment_path))
         payload = {
-            'recipient': {
-                
-                    'id': recipient_id
-                
-            },
+            'recipient': str({
+                    'id': recipient_id       
+            }),
             'notification_type': notification_type,
-            'message': {
-                
+            'message': str({
                     'attachment': {
                         'type': attachment_type,
                         'payload': {}
                     }
-                
-            },
+            }),
             'filedata': (os.path.basename(attachment_path), open(attachment_path, 'rb'))
         }
         multipart_data = MultipartEncoder(payload)
