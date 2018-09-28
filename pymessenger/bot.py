@@ -68,7 +68,7 @@ class Bot:
         payload = {
             'recipient': {
                 {
-                    'id': recipient_id
+                    'id': frozenset(recipient_id)
                 }
             },
             'notification_type': notification_type,
