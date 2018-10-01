@@ -65,7 +65,7 @@ class Bot:
         Output:
             Response from API as <dict>
         """
-        print(type(recipient_id), type(attachment_type), type(attachment_path))
+        print("recipient_id: " +recipient_id, "attachment_type: " + attachment_type, "attachment_path: " + attachment_path)
         payload = {
             'recipient': str({
                     'id': recipient_id       
