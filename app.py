@@ -75,8 +75,7 @@ def send_attachment_url_message(recipient_id, file_type, url):
     return "success"
 
 def send_attachment_message(recipient_id, file_type, file_location):
-    bot.send_attachment(recipient_id, file_type, file_location)
-    return "sucess"
+    return bot.send_attachment(recipient_id, file_type, file_location)
 
 def save_file(data, file_location):
     with open(file_location, "wb") as fh:
