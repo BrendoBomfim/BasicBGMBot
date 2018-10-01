@@ -28,6 +28,7 @@ class Bot:
         self.api_version = kwargs.get('api_version') or DEFAULT_API_VERSION
         self.app_secret = kwargs.get('app_secret')
         self.graph_url = 'https://graph.facebook.com/v{0}'.format(self.api_version)
+        self.graph_file_url = 'https://graph.facebook.com/v{0}/me/messages?access_token={1}'.format(self.api_version, os.environ['ACCESS_TOKEN'])
         self.access_token = access_token
 
     @property
@@ -72,16 +73,16 @@ class Bot:
             'message': str({
                     'attachment': {
                         'type': attachment_type,
-                        'payload': {}
+                        'payload': {"is_reusable":True}
                     }
             }),
-            'filedata': (os.path.basename(attachment_path), open(attachment_path, 'rb'))
+            'filedata':(os.path.basename(attachment_path), open(attachment_path, 'rb'))
         }
         multipart_data = MultipartEncoder(payload)
         multipart_header = {
             'Content-Type': multipart_data.content_type
         }
-        return requests.post(self.graph_url, data=multipart_data,
+        return requests.post(self.graph_file_url, data=multipart_data,
                              params=self.auth_args, headers=multipart_header).json()
 
     def send_attachment_url(self, recipient_id, attachment_type, attachment_url,
