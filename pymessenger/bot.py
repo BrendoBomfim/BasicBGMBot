@@ -82,6 +82,7 @@ class Bot:
         }
         print(os.path.basename(attachment_path), open(attachment_path, 'rb'))
         multipart_data = MultipartEncoder(payload)
+        print(multipart_data)
         multipart_header = {
             'Content-Type': multipart_data.content_type
         }
