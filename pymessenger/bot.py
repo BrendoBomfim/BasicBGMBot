@@ -67,6 +67,7 @@ class Bot:
         """
         print("recipient_id: " +recipient_id, "attachment_type: " + attachment_type, "attachment_path: " + attachment_path)
         payload = {
+            'messaging_type': 'RESPONSE',
             'recipient': str({
                     'id': recipient_id       
             }),
