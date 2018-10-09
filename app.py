@@ -38,14 +38,15 @@ def receive_message():
                 if message['message'].get('attachments'):
                     for att in message['message'].get('attachments'):
                         file_type = att['type']
-                        url = att['payload']['url']
+                        print(file_type)
+                        url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=14T1_DTyYZxBtF1TNPaubDq1we2Avni_o&export=download'
                         file_name = url.split("/")[5].split("?")[0]
                         file_location = "/tmp/" + file_name
                         base64_string = download_file(url)
                         save_file(base64_string, file_location)
-                        print(send_attachment_message(recipient_id, file_type, file_location))
+                        #print(send_attachment_message(recipient_id, file_type, file_location))
                         #print(os.listdir("/tmp"))
-                        #send_attachment_url_message(recipient_id, file_type, url)
+                        print(send_attachment_url_message(recipient_id, file_type, url))
     return "Message Processed"
 
 
@@ -71,8 +72,8 @@ def send_message(recipient_id, response):
 
 def send_attachment_url_message(recipient_id, file_type, url):
     #sends user the text message provided via input response parameter
-    bot.send_attachment_url(recipient_id, file_type, url)
-    return "success"
+    response = bot.send_attachment_url(recipient_id, file_type, url)
+    return response
 
 def send_attachment_message(recipient_id, file_type, file_location):
     return bot.send_attachment(recipient_id, file_type, file_location)
