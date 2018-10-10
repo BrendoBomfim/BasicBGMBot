@@ -40,7 +40,7 @@ def receive_message():
                         file_type = att['type']
                         print(file_type)
                         url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
-                        file_name = url.split("/")[5].split("?")[0]
+                        file_name = url.split("?")[0].split("/")[-1]
                         print(file_name)
                         file_location = "/tmp/" + file_name
                         print (file_location)
