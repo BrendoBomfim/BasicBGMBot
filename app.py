@@ -39,7 +39,7 @@ def receive_message():
                     for att in message['message'].get('attachments'):
                         file_type = att['type']
                         print(file_type)
-                        url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=14T1_DTyYZxBtF1TNPaubDq1we2Avni_o&export=download'
+                        url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
                         file_name = url.split("/")[5].split("?")[0]
                         file_location = "/tmp/" + file_name
                         base64_string = download_file(url)
