@@ -41,7 +41,9 @@ def receive_message():
                         print(file_type)
                         url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
                         file_name = url.split("/")[5].split("?")[0]
+                        print(file_name)
                         file_location = "/tmp/" + file_name
+                        print (file_location)
                         base64_string = download_file(url)
                         save_file(base64_string, file_location)
                         #print(send_attachment_message(recipient_id, file_type, file_location))
