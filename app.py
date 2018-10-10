@@ -39,7 +39,8 @@ def receive_message():
                     for att in message['message'].get('attachments'):
                         file_type = att['type']
                         print(file_type)
-                        url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
+                        #url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
+                        url = att['payload']['url']
                         file_name = url.split("?")[0].split("/")[-1]
                         print(file_name)
                         file_location = "/tmp/" + file_name
