@@ -4,7 +4,8 @@ import base64
 import requests
 from flask import Flask, request
 from pymessenger.bot import Bot
-import os 
+import os
+import upload_files 
 app = Flask(__name__)
 #ACCESS_TOKEN = 'ACCESS_TOKEN'   
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
@@ -22,6 +23,7 @@ def receive_message():
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
+        
         # get whatever message a user sent the bot
        output = request.get_json()
        for event in output['entry']:
@@ -39,18 +41,25 @@ def receive_message():
                     for att in message['message'].get('attachments'):
                         file_type = att['type']
                         print(file_type)
-                        #url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
-                        url = att['payload']['url']
-                        file_name = url.split("?")[0].split("/")[-1]
+                        url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
+                        url_name = att['payload']['url']
+                        file_name = url_name.split("?")[0].split("/")[-1]
                         print(file_name)
-                        file_location = "/tmp/" + file_name
-                        print (file_location)
-                        base64_string = download_file(url)
-                        save_file(base64_string, file_location)
-                        print(send_attachment_message(recipient_id, file_type, file_location))
-                        print(os.listdir("/tmp"))
-                        #print(send_attachment_url_message(recipient_id, file_type, url))
+                        print(file_name)
+                        print(url)
+                        #print(upload_files.upload_file(url_name, ))
+                        #file_location = "/tmp/" + file_name
+                        #print (file_location)
+                        #base64_string = download_file(url)
+                        #save_file(base64_string, file_location)
+                        #print(send_attachment_message(recipient_id, file_type, file_location))
+                        #print(os.listdir("/tmp"))
+                        print(send_attachment_url_message(recipient_id, file_type, url))
     return "Message Processed"
+
+
+#def upload_file_gdrive(name, mime):
+
 
 
 def verify_fb_token(token_sent):
