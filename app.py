@@ -41,7 +41,7 @@ def receive_message():
                     for att in message['message'].get('attachments'):
                         file_type = att['type']
                         print(file_type)
-                        url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
+                        #url = 'https://drive.google.com/a/sciosolutions.com.br/uc?id=1emodK6WomZ6s96oIUgxfrohqu-nulXsb&export=download'
                         url_name = att['payload']['url']
                         file_name = url_name.split("?")[0].split("/")[-1]
                         print(file_name)
@@ -50,7 +50,7 @@ def receive_message():
                         #print (file_location)
                         base64_string = download_file(url)
                         save_file(base64_string, file_location)
-                        print(send_attachment_message(recipient_id, file_type, file_location))
+                        #print(send_attachment_message(recipient_id, file_type, file_location))
                         #print(os.listdir("/tmp"))
                         #print(upload_files.upload_file(file_location, "application/pdf"))
                         #print(send_attachment_url_message(recipient_id, file_type, url))
