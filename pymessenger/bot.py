@@ -95,8 +95,6 @@ class Bot(object):
                 content_type = attachment_type + '/' + attachment_ext # eg: audio/mp3
             else:
                 content_type = ''
-            print(content_type, attachment_filename )
-            fd = '@{};type={}'.format(attachment_filename, content_type)
             payload = {
                 'recipient': json.dumps({
                     'id': recipient_id
@@ -108,8 +106,10 @@ class Bot(object):
                         'payload': {}
                     }
                 }),
-                'filedata': fd
+                'filedata':
+                (attachment_filename, f, content_type)
             }
+            print(attachment_filename, f, content_type)
             multipart_data = MultipartEncoder(payload)
             multipart_header = {'Content-Type': multipart_data.content_type}
             request_endpoint = '{0}/me/messages'.format(self.graph_url)
