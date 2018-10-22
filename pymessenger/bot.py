@@ -95,7 +95,7 @@ class Bot(object):
                 content_type = attachment_type + '/' + attachment_ext # eg: audio/mp3
             else:
                 content_type = ''
-            
+            print(content_type, attachment_filename )
             fd = '@{};type={}'.format(attachment_filename, content_type)
             payload = {
                 'recipient': json.dumps({
