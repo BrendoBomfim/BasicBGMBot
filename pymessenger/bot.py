@@ -112,6 +112,7 @@ class Bot(object):
             print(attachment_filename, f, content_type)
             multipart_data = MultipartEncoder(payload)
             multipart_header = {'Content-Type': multipart_data.content_type}
+            print(multipart_data, multipart_header)
             request_endpoint = '{0}/me/messages'.format(self.graph_url)
             return requests.post(
                 request_endpoint,
