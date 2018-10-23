@@ -8,7 +8,7 @@ from requests_toolbelt import MultipartEncoder
 from pymessenger import utils
 from pymessenger.utils import AttrsEncoder
 
-DEFAULT_API_VERSION = 2.6
+DEFAULT_API_VERSION = 3.2
 
 
 class NotificationType(Enum):
@@ -113,7 +113,7 @@ class Bot(object):
             multipart_data = MultipartEncoder(payload)
             multipart_header = {'Content-Type': multipart_data.content_type}
             print(multipart_data, multipart_header)
-            request_endpoint = 'v2.8/me/messages'.format(self.graph_url)
+            request_endpoint = '{0}/me/messages'.format(self.graph_url)
             return requests.post(
                 request_endpoint,
                 data=multipart_data,
