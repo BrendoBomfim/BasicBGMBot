@@ -99,7 +99,6 @@ class Bot(object):
                 'recipient': json.dumps({
                     'id': recipient_id
                 }),
-                'notification_type': notification_type.value,
                 'message': json.dumps({
                     'attachment': {
                         'type': attachment_type,
