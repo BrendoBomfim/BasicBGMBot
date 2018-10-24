@@ -80,8 +80,8 @@ class Bot(object):
 
     def send_attachment(self,
                         recipient_id,
-                        attachment_type,
                         attachment_path,
+                        attachment_type,
                         notification_type=NotificationType.regular):
         """Send an attachment to the specified recipient using local path.
         Input:
@@ -98,6 +98,9 @@ class Bot(object):
                 content_type = attachment_type + '/' + attachment_ext # eg: audio/mp3
             else:
                 content_type = ''
+            
+            filedata = '@{};type={}'.format(attachment_filename, content_type)
+
             payload = {
                 'recipient': json.dumps({
                     'id': recipient_id
@@ -108,8 +111,9 @@ class Bot(object):
                         'payload': {}
                     }
                 }),
-                'filedata':
-                (attachment_filename, f, content_type)
+                'filedata': filedata
+                #(attachment_filename, f, content_type)
+                
             }
             print(attachment_filename, f, content_type)
             multipart_data = MultipartEncoder(payload)
