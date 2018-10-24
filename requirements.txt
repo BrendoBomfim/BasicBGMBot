@@ -4,4 +4,3 @@ gunicorn==19.6.0
 google-api-python-client
 oauth2client
 attr
-subprocess
