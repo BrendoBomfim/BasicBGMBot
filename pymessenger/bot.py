@@ -112,7 +112,7 @@ class Bot(object):
                     }
                 }),
                 #'filedata': filedata
-                'filedata': (attachment_filename, f, content_type)
+                'filedata': (attachment_filename, f, "image/jpeg")
                 
             }
             print(attachment_filename, f, content_type)
