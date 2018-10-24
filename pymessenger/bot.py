@@ -8,6 +8,9 @@ from requests_toolbelt import MultipartEncoder
 from pymessenger import utils
 from pymessenger.utils import AttrsEncoder
 
+
+import subprocess
+
 DEFAULT_API_VERSION = 3.2
 
 
@@ -256,6 +259,44 @@ class Bot(object):
         """
         return self.send_attachment(recipient_id, "image", image_path,
                                     notification_type)
+
+    
+
+    def send_image_curl(self, recipient_id, image_path,
+                image_type, passive=False):
+        """
+        Note: MESSAGE_TAG is introduced to circumvent 24+1h window limit
+        """
+        args = [
+            'curl',
+            '-F',
+            'recipient={"id":"%s"}' % recipient_id,
+            '-F',
+            'message={"attachment":{"type":"image", "payload":{}}}',
+            '-F',
+            'filedata=@{};type={}'.format(image_path, image_type)
+        ]
+        if passive:
+            args.append('-F')
+            args.append('messaging_type=MESSAGE_TAG')
+            args.append('-F')
+            args.append('tag=NON_PROMOTIONAL_SUBSCRIPTION')
+        else:
+            args.append('-F')
+            args.append('messaging_type=RESPONSE')
+        args.append(
+            'https://graph.facebook.com/v2.8/me/messages?access_token={}'.format(
+                self.access_token
+            )
+        )
+        # Execute
+        p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
+        (output, err) = p.communicate()
+        if err:
+            print(err)
+
+
+
 
     def send_image_url(self,
                        recipient_id,
