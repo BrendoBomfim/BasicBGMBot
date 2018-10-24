@@ -99,7 +99,7 @@ class Bot(object):
             else:
                 content_type = ''
             
-            filedata = '@{};type={}'.format(attachment_filename, content_type)
+            filedata = '@{};type={}'.format(attachment_path, content_type)
 
             payload = {
                 'recipient': json.dumps({
