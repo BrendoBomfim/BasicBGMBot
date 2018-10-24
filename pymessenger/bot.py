@@ -111,8 +111,8 @@ class Bot(object):
                         'payload': {}
                     }
                 }),
-                'filedata': filedata
-                #(attachment_filename, f, content_type)
+                #'filedata': filedata
+                'filedata': (attachment_filename, f, "image/png")
                 
             }
             print(attachment_filename, f, content_type)

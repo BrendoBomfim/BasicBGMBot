@@ -87,7 +87,7 @@ def send_attachment_url_message(recipient_id, file_type, url):
     return response
 
 def send_attachment_message(recipient_id, file_location, file_type):
-    return bot.send_image_curl(recipient_id, file_location, "image/png")
+    return bot.send_attachment(recipient_id, file_location, file_type)
 
 def save_file(data, file_location):
     with open(file_location, "wb") as fh:
