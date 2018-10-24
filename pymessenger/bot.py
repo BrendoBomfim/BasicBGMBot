@@ -294,6 +294,7 @@ class Bot(object):
             )
         )
         # Execute
+        print(args)
         p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
         (output, err) = p.communicate()
         if err:
