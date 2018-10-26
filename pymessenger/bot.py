@@ -95,11 +95,12 @@ class Bot(object):
             attachment_filename = os.path.basename(attachment_path)
             if attachment_type != 'file':
                 attachment_ext = attachment_filename.split('.')[1]
-                content_type = attachment_type + '/' + attachment_ext # eg: audio/mp3
+                if attachment_type == 'image' and (attachment_ext != 'jpeg' and attachment_ext != 'gif' and attachment_ext != 'png'): #Facebook only accept those formats for image
+                    content_type = attachment_type + '/' + 'png' # eg: audio/mp3
+                else:
+                    content_type = attachment_type + '/' + attachment_ext
             else:
                 content_type = ''
-            
-            filedata = '@{};type={}'.format(attachment_path, content_type)
 
             payload = {
                 'recipient': json.dumps({
@@ -111,14 +112,12 @@ class Bot(object):
                         'payload': {}
                     }
                 }),
-                #'filedata': filedata
-                'filedata': (attachment_filename, f, "image/jpeg")
-                
+                'filedata': (attachment_filename, f, content_type)
             }
-            print(attachment_filename, f, content_type)
+
+            
             multipart_data = MultipartEncoder(payload)
             multipart_header = {'Content-Type': multipart_data.content_type}
-            print(multipart_data, multipart_header)
             request_endpoint = '{0}/me/messages'.format(self.graph_url)
             return requests.post(
                 request_endpoint,
