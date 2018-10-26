@@ -429,6 +429,7 @@ class Bot(object):
 
         request_endpoint = '{0}/{1}'.format(self.graph_url, recipient_id)
         response = requests.get(request_endpoint, params=params)
+        print(response.json())
         if response.status_code == 200:
             return response.json()
 
