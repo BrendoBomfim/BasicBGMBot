@@ -124,4 +124,4 @@ def download_file(url):
 	return base64.b64encode(requests.get(url).content)
 
 if __name__ == "__main__":
-	app.run(ssl_context=('cert/cert.pem', 'cert/key.pem'))
+	app.run(ssl_context=('cert/cert.pem', 'cert/privkey.pem'))
