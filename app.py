@@ -2,6 +2,8 @@
 import random
 import base64
 import requests
+import time
+import datetime as dt
 from flask import Flask, request
 from pymessenger.bot import Bot
 import os
@@ -31,7 +33,7 @@ def receive_message():
 		for event in output['entry']:
 			messaging = event['messaging']
 			for message in messaging:
-    			epoch_now = time.time()
+				epoch_now = time.time()
 				frmt_date = dt.datetime. utcfromtimestamp(epoch_now).strftime("%Y/%m/%d %H:%M")
 				if message.get('message'):
 					#Facebook Messenger ID for user so we know where to send response back to
